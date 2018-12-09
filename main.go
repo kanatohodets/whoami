@@ -11,7 +11,7 @@ func whoami(w http.ResponseWriter, req *http.Request) {
 	podName := os.Getenv("POD_NAME")
 
 	w.Header().Set("Content-Type", "text/plain")
-	w.Write([]byte(version + " / " + podName + "\n"))
+	w.Write([]byte(version + " / " + podName + " says hello!\n"))
 }
 
 func main() {
