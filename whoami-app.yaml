@@ -1,0 +1,45 @@
+apiVersion: shipper.booking.com/v1alpha1
+kind: Application
+metadata:
+  name: whoami
+  namespace: demo
+spec:
+  template:
+    chart:
+      name: whoami
+      repoUrl: https://storage.googleapis.com/shipper-demo
+      version: 0.0.1
+    clusterRequirements:
+      regions:
+      - name: us-central1
+      - name: australia-southeast1
+      - name: europe-west1
+      - name: asia-northeast1
+    strategy:
+      steps:
+      - name: staging
+        capacity:
+          incumbent: 100
+          contender: 1
+        traffic:
+          incumbent: 100
+          contender: 0
+      - name: 50/50
+        capacity:
+          incumbent: 50
+          contender: 50
+        traffic:
+          incumbent: 50
+          contender: 50
+      - name: full on
+        capacity:
+          incumbent: 0
+          contender: 100
+        traffic:
+          incumbent: 0
+          contender: 100
+    values:
+      replicaCount: 4
+      image:
+        repository: kanatohodets/whoami
+        tag: v1
