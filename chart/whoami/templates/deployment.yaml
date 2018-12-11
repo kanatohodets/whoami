@@ -24,6 +24,10 @@ spec:
           env:
             - name: SHIPPER_RELEASE
               value: {{ .Release.Name }}
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
           ports:
             - containerPort: {{ .Values.service.internalPort }}
           livenessProbe:
