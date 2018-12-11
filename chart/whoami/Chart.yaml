@@ -1,4 +1,4 @@
 apiVersion: v1
 description: Who am I?
 name: whoami
-version: 0.0.2
+version: 0.0.3
